@@ -1,0 +1,142 @@
+# Default configuration for Multi-Modal Models (MMM)
+# HSE 2025 - Multi-Modal Learning Course
+
+# Model Configuration
+model:
+  name: "MultiModalClassifier"
+  num_classes: 10
+  hidden_dim: 512
+  dropout: 0.1
+  fusion_method: "concat"  # Options: concat, attention, sum
+  
+  # Modality-specific dimensions
+  text_dim: 768      # BERT/RoBERTa embedding dimension
+  image_dim: 2048    # ResNet feature dimension
+  audio_dim: 512     # Audio feature dimension
+
+# Training Configuration
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  num_epochs: 100
+  weight_decay: 0.0001
+  gradient_clip_norm: 1.0
+  
+  # Optimizer settings
+  optimizer: "adamw"  # Options: adam, adamw, sgd
+  scheduler: "cosine"  # Options: cosine, step, exponential
+  warmup_steps: 1000
+  
+  # Loss function
+  loss_function: "cross_entropy"
+  label_smoothing: 0.1
+
+# Data Configuration
+data:
+  # Dataset paths (adjust according to your data)
+  train_data_path: "data/train.json"
+  val_data_path: "data/val.json"
+  test_data_path: "data/test.json"
+  
+  # Data splits (if creating from single dataset)
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+  
+  # Data loading
+  num_workers: 4
+  pin_memory: true
+  prefetch_factor: 2
+
+# Preprocessing Configuration
+preprocessing:
+  # Text preprocessing
+  text:
+    max_length: 512
+    tokenizer: "bert-base-uncased"
+    lowercase: true
+    remove_special_chars: false
+  
+  # Image preprocessing
+  image:
+    resize: [224, 224]
+    normalize_mean: [0.485, 0.456, 0.406]
+    normalize_std: [0.229, 0.224, 0.225]
+    augmentation: true
+  
+  # Audio preprocessing
+  audio:
+    sample_rate: 16000
+    duration: 10.0  # seconds
+    n_mels: 128
+    hop_length: 512
+
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - "accuracy"
+    - "f1_score"
+    - "precision"
+    - "recall"
+    - "confusion_matrix"
+  
+  # Cross-modal evaluation
+  cross_modal_retrieval: true
+  retrieval_k: [1, 5, 10]
+
+# Hardware Configuration
+hardware:
+  device: "auto"  # Options: auto, cpu, cuda, mps
+  mixed_precision: true
+  compile_model: false  # PyTorch 2.0 compilation
+  
+  # Multi-GPU settings
+  distributed: false
+  world_size: 1
+  local_rank: 0
+
+# Logging and Monitoring
+logging:
+  log_level: "INFO"
+  log_dir: "logs"
+  experiment_name: "multimodal_experiment"
+  
+  # Weights & Biases integration
+  use_wandb: false
+  wandb_project: "mmm-hse-2025"
+  wandb_entity: "hse-ai-lab"
+  
+  # TensorBoard integration  
+  use_tensorboard: true
+  tensorboard_log_dir: "runs"
+
+# Model Checkpointing
+checkpointing:
+  save_dir: "checkpoints"
+  save_best_only: true
+  save_last: true
+  monitor_metric: "val_accuracy"
+  mode: "max"  # max for accuracy, min for loss
+  
+  # Early stopping
+  early_stopping: true
+  patience: 10
+  min_delta: 0.001
+
+# Reproducibility
+random_seed: 42
+deterministic: true
+
+# HSE Course Specific Settings
+course:
+  year: 2025
+  semester: "spring"
+  assignment: "multi_modal_project"
+  
+  # Educational features
+  explain_predictions: true
+  visualization: true
+  save_attention_maps: true
+  
+  # Difficulty levels for assignments
+  difficulty_level: "intermediate"  # beginner, intermediate, advanced
