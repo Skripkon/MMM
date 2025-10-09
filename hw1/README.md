@@ -15,25 +15,13 @@
 
 ## Tasks Overview
 
-### ✅ 1. Image→Image Retrieval (3 points)
-- **Image Encoder**: Selected a pre-trained vision model to extract image embeddings
-- **Index Construction**: Built FAISS index for efficient similarity search
-- **Demo**: Implemented top-10 nearest neighbor retrieval for visual similarity search across 10 diverse examples
+### ✅ 1. Image→Image Retrieval (3 points) (CLIP)
 
-### ✅ 2. Caption→Image Retrieval (3 points)
-- **Captioning Model**: Used VLM for automatic caption generation
-- **Caption Examples**: Generated descriptive captions for artwork dataset
-- **Index & Demo**: Built caption-based retrieval index, demonstrated top-10 results for 10 examples
-- **Dataset Publication**: Published generated captions dataset (image metadata + captions)
+### ✅ 2. Caption→Image Retrieval (3 points) (BLIP)
 
-### ✅ 3. Omni→Image Retrieval (4 points)
-- **Zero-Shot Features**: Generated genre, style, and semantic tags using Vision-Language Model
-- **Multi-modal Search**: Implemented flexible search combining text queries, genres, and extracted features
+### ✅ 3. Omni→Image Retrieval (4 points) (CLIP + BLIP + LLaVa + deterministic filters)
 
-### ✅ Bonus: Interactive Demo (3 points)
-- Created Gradio/Streamlit demo with all three retrieval functionalities
-- Interactive interface for image upload, text queries, and tag-based search
-
+### ✅ Bonus: Interactive Demo (3 points) (Gradio)
 ---
 
 ## Dataset
